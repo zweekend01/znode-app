@@ -1,0 +1,67 @@
+{
+  "name": "znode-app",
+  "version": "1.0.0",
+  "description": "基于 NodeJS 实现的博客网站",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js --ext .jsx client/",
+    "dev:build": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.index.js",
+    "clear": "rimraf public",
+    "pro:build": "npm run clear && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.index.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run clear"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zweekend01/znode-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zweekend01/znode-app/issues"
+  },
+  "homepage": "https://github.com/zweekend01/znode-app#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "bable-loader": "^0.0.1-security",
+    "cross-env": "^5.2.0",
+    "css-loader": "^2.1.1",
+    "cssnano": "^4.1.10",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^2.3.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.6.0",
+    "raw-loader": "^2.0.0",
+    "react-hot-loader": "^4.8.5",
+    "rimraf": "^2.6.3",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
