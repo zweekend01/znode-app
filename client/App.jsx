@@ -1,10 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader/root'
 
-const App = () => {
-  return (
-    <div>Hello world!</div>
-  )
-}
+const App = () => <div>Hello world hello!</div>
 
 export default hot(App)

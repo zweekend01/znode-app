@@ -89,7 +89,7 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
 
 ```json
   {
-    "scripts:" {
+    "scripts": {
       "lint": "eslint --ext .js --ext .jsx client/"
     },
     "husky": {
@@ -129,11 +129,12 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
     less \
     html-webpack-plugin \
     webpack-dev-server \
-    react-hot-loader \
     webpack \
     webpack-cli \
     cross-env \
     rimraf
+
+  $ npm i -S react-hot-loader
 ```
 
 - 配置 .babelrc、postcss.config.js、webpack.config.client.js、webpack.config.index.js文件

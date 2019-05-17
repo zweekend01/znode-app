@@ -30,7 +30,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "bable-loader": "^0.0.1-security",
+    "babel-loader": "^8.0.6",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
@@ -52,7 +52,6 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
     "raw-loader": "^2.0.0",
-    "react-hot-loader": "^4.8.5",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
@@ -62,6 +61,8 @@
   },
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.8.5",
+    "to-fast-properties": "^2.0.0"
   }
 }

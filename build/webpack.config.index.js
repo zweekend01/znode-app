@@ -6,8 +6,8 @@ const isDev = process.env.NODE_ENV === 'development'
 
 if (isDev) {
   clientConfig.mode = 'development'
-  clientConfig.plugin.push(new webpack.HotModuleReplacementPlugin())
-  configConfig.devtool = '#cheap-module-eval-source-map'
+  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+  clientConfig.devtool = '#cheap-module-eval-source-map'
   clientConfig.devServer = {
     host: '0.0.0.0',
     port: '8888',
@@ -17,8 +17,6 @@ if (isDev) {
     overlay: { errors: true },
     hot: true
   }
-} else {
-
 }
 
 module.exports = [clientConfig]
