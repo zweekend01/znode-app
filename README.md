@@ -267,3 +267,30 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
 ```
 
 > (3) 同构渲染的开发/生产环境配置
+
+
+## 4. 项目架构
+
+### 4.1 client项目架构
+
+> (1) 前端渲染的项目架构
+
+```
+  - client
+    - assets        => 静态资源
+    - components    => 项目的通用组件，包括布局组件和高阶组件等
+      - hoc
+      - layout
+    - config        => 项目的一些配置
+    - pages         => 页面组件
+    - routes        => 路由组件
+    - stores        => 状态管理
+    - styles        => 项目通用的样式，以及全局的样式兼容性设置
+    - utils         => 工具库
+    - App.jsx
+    - App.less
+    - index.html
+    - index.js
+```
+
+> (2) 同构渲染的项目架构
