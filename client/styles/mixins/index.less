@@ -1,0 +1,67 @@
+@import '../themes/index';
+
+// Reset component style
+.reset-component {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: @font-size;
+  line-height: @line-height;
+  color: @text-color;
+}
+
+// Set width and height
+.size (@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+.square (@size) {
+  .size(@size; @size);
+}
+
+// Control text lines
+.line-limit (@num) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @num;
+  overflow: hidden;
+}
+
+// Clearfix
+.clearfix () {
+  zoom: 1;
+  &::before,
+  &::after {
+    display: table;
+    content: '';
+  }
+  &::after {
+    clear: both;
+  }
+}
+
+// Placeholder text compatibility
+.placeholder (@color: @input-placeholder-color) {
+  // Firefox
+  &::-moz-placeholder {
+    color: @color;
+    opacity: 1;
+  }
+  // IE10+
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+  // Safari and Chrome
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}
+
+// Center by position
+.position-center {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

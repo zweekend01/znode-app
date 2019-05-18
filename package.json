@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "react": "^16.8.6",
+    "react-css-modules": "^4.7.11",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.5",
     "to-fast-properties": "^2.0.0"

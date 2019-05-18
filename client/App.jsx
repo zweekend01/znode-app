@@ -1,6 +1,8 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
+import CSSModules from 'react-css-modules'
+import styles from './App.less'
 
-const App = () => <div>Hello world hello!</div>
+const App = () => <div styleName="root">Hello world hello!</div>
 
-export default hot(App)
+export default hot(CSSModules(App, styles))
