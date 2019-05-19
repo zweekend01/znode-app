@@ -7,6 +7,21 @@
   <title>Document</title>
 </head>
 <body>
+  <noscript>Open Javascript,for better experience!</noscript>
   <div id="root"></div>
+  <script type="text/javascript">
+    // 弹性布局
+    const documentElement = document.documentElement
+    function correctHtmlFontSize () {
+      const clientWidth =
+      // 浏览器支持的最小的font-size为9.6px
+      documentElement.style.fontSize = documentElement.clientWidth / 10 + 'px'
+      console.log(documentElement.style.fontSize)
+    }
+
+    // 监听屏幕尺寸变化的事件
+    document.addEventListener('DOMContentLoaded', correctHtmlFontSize)
+    window.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', correctHtmlFontSize)
+  </script>
 </body>
 </html>

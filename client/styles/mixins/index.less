@@ -1,5 +1,15 @@
 @import '../themes/index';
 
+// Px to rem
+.px2remWrapper () {
+  @function: ~`(function(ueWidth) {
+    this.px2rem = function (px) {
+      return px / ueWidth * 10 + 'rem'
+    }
+  })('@{ue-width}')`
+}
+.px2remWrapper();
+
 // Reset component style
 .reset-component {
   box-sizing: border-box;
@@ -11,9 +21,21 @@
 }
 
 // Set width and height
-.size (@width; @height) {
+.size (@width; @height) when (ispercentage(@width)) and (ispercentage(@height)) {
   width: @width;
   height: @height;
+}
+.size (@width; @height) when (ispercentage(@width)) and (isnumber(@height)) {
+  width: @width;
+  height: ~`px2rem('@{height}')`;
+}
+.size (@width; @height) when (isnumber(@width)) and (ispercentage(@height)) {
+  width: ~`px2rem('@{width}')`;
+  height: @height;
+}
+.size (@width; @height) when (isnumber(@width)) and (isnumber(@height)) {
+  width: ~`px2rem('@{width}')`;
+  height: ~`px2rem('@{height}')`;
 }
 
 .square (@size) {
@@ -26,19 +48,6 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: @num;
   overflow: hidden;
-}
-
-// Clearfix
-.clearfix () {
-  zoom: 1;
-  &::before,
-  &::after {
-    display: table;
-    content: '';
-  }
-  &::after {
-    clear: both;
-  }
 }
 
 // Placeholder text compatibility
@@ -58,10 +67,3 @@
   }
 }
 
-// Center by position
-.position-center {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
