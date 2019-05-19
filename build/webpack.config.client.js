@@ -47,14 +47,40 @@ module.exports = {
               camelCase: true
             }
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss'
+            }
+          },
           {
             loader: 'less-loader',
             options: {
               javascriptEnabled: true
             }
+          }
+        ],
+        exclude: [path.join(__dirname, '../node_modules')]
+      },
+      // 针对antd的样式
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
           },
-        ]
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss'
+            }
+          }
+        ],
+        include: /node_modules/,
       }
     ]
   },

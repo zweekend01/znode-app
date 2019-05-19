@@ -27,10 +27,13 @@
   "homepage": "https://github.com/zweekend01/znode-app#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.11.2",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
@@ -48,6 +51,7 @@
     "husky": "^2.3.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
@@ -60,10 +64,14 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "antd": "^3.18.1",
+    "axios": "^0.18.0",
+    "eventemitter3": "^3.1.2",
     "react": "^16.8.6",
     "react-css-modules": "^4.7.11",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.5",
+    "regenerator-runtime": "^0.13.2",
     "to-fast-properties": "^2.0.0"
   }
 }

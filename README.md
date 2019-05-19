@@ -125,6 +125,8 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
     postcss-import \
     postcss-preset-env \
     cssnano \
+    autoprefixer \
+    postcss-flexbugs-fixes \
     less-loader \
     less \
     html-webpack-plugin \
@@ -156,7 +158,17 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
     plugins: {
       'postcss-import': {},
       'postcss-preset-env': {},
-      'cssnano': {}
+      cssnano: {},
+      autoprefixer: {
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9', // React doesn't support IE8 anyway
+        ],
+        flexbox: 'no-2009',
+      },
+      'postcss-flexbugs-fixes': {}
     }
   }
 ```
@@ -212,9 +224,20 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
                 camelCase: true
               }
             },
-            'postcss-loader',
-            'less-loader',
-          ]
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss'
+              }
+            },
+            {
+              loader: 'less-loader',
+              options: {
+                javascriptEnabled: true
+              }
+            }
+          ],
+          exclude: [path.join(__dirname, '../node_modules')]
         }
       ]
     },

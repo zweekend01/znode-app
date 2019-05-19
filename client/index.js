@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import App from './App'
-import './styles/index.less'
+import 'regenerator-runtime/runtime'
+// import './styles/index.less'
 
 ReactDOM.render(<App />, document.getElementById('root'))

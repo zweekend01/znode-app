@@ -4,17 +4,19 @@
 //  需要进一步完善
 
 // 当Javascript被禁止时，弹性布局的回退方案
-@media screen and (max-width: 991.98px) {
-  .px2rem (@px) {
-    width: (@px / @ue-width * 10) rem;
-  }
+@media screen and (min-width: 576px) {
+  html { font-size: 57px; }
+}
+@media screen and (min-width: 768px) {
+  html { font-size: 76px; }
+}
+@media screen and (min-width: 992px) {
+  html { font-size: 99px; }
+}
+@media screen and (min-width: 1200px) {
+  html { font-size: 120px; }
 }
 
-@media screen and (min-width: 992px) {
-  .px2rem (@px) {
-    width: (@px / @ue-width * 100) rem;
-  }
-}
 
 @-ms-viewport {
   width: device-width;
