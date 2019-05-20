@@ -7,12 +7,11 @@ import request from '../../config/http'
 
 class Home extends Component {
   state = {
-    name: 'This is Home!'
+    name: 'This is Hemoe!'
   }
 
   onRequest = async () => {
-    const data = await request({ url: '/api' })
-    console.log(data)
+    await request({ url: '/api', needToken: false })
   }
 
   render () {

@@ -2,8 +2,8 @@ import { hot } from 'react-hot-loader/root'
 import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import { Spin } from 'antd'
-import styles from './App.less'
 import Home from './pages/Home'
+import styles from './App.less'
 
 class App extends Component {
   state = {
@@ -35,8 +35,8 @@ class App extends Component {
     const { loading, loadingText } = this.state
 
     return (
-      <div>
-        <Spin spinning={loading} tip={loadingText}>
+      <div styleName="wrapper">
+        <Spin wrapperClassName={styles.spinWrapper} spinning={loading} tip={loadingText} size="large">
           <Home />
         </Spin>
       </div>
