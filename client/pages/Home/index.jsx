@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { Button } from 'antd'
 
 import styles from './index.less'
-import request from '../../config/http'
+import Http from '../../config/http'
 
 class Home extends Component {
   state = {
@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   onRequest = async () => {
-    await request({ url: '/api', needToken: false })
+    await Http.request({ url: '/api', needToken: false })
   }
 
   render () {
