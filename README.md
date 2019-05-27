@@ -367,6 +367,30 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
 
 > (2) 同构渲染的项目架构
 
+### 4.2 server项目架构
+
+> (1) 前端渲染的项目架构
+
+```cmd
+  - server
+    - api
+    - apidoc
+    - bin
+      - www.js
+    - config
+    - controllers
+    - middlewares
+    - models
+    - public
+    - routers
+    - sql
+    - utils
+    - views
+    - app.js
+```
+
+> (2) 同构渲染的项目架构
+
 ## 5. 业务开发
 
 ### 5.1 client业务开发
