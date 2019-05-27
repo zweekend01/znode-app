@@ -291,6 +291,56 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
 
 > (3) 同构渲染的开发/生产环境配置
 
+### 3.2 server工程架构
+
+#### 3.2.1 editorconfig
+
+#### 3.2.2 eslint
+
+#### 3.2.3 git
+
+#### 3.2.4 nodemon
+
+- 安装相关 npm package:
+
+```cmd
+  $ npm i nodemon -D
+```
+
+- 配置 nodemon.json文件
+
+```json
+  {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules",
+      ".eslintrc",
+      "build",
+      "client",
+      "public"
+    ],
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "verbose": true,
+    "ext": "js"
+  }
+```
+
+- 在 package.json 文件中添加 npm scripts
+
+```json
+  {
+    "scripts": {
+      "dev:start": "cross-env NODE_ENV=development node server/bin/www.js",
+      "dev:monstart": "nodemon server/bin/www.js",
+      "pro:start": "cross-env NODE_ENV=production node server/bin/www.js",
+      "pro:monstart": "nodemon server/bin/www.js"
+    }
+  }
+```
+
 ## 4. 项目架构
 
 ### 4.1 client项目架构
@@ -321,10 +371,14 @@ eslint 是 javascript 编程格式的校验工具，有助于团队的编程格�
 
 ### 5.1 client业务开发
 
-> (1) 配置全局的样式
+> (1) 前端渲染的业务开发
+
+- 配置全局的样式
 
 解决html元素在各浏览器中兼容性的问题、实现基于rem的弹性布局、解决antd接入的一些第三方样式的冲突
 
-> (2) 基于axios封装http请求
+- 基于axios封装http请求
 
 请求loading的开启与关闭、请求成功的统一提示、请求失败的统一提示
+
+> (2) 同构渲染的业务开发
