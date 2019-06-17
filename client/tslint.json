@@ -1,0 +1,6 @@
+{
+  "extends": ["../tslint.json", "tslint-react"],
+  "rules": {
+    "quotemark": false
+  }
+}

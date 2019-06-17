@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CSSModules from 'react-css-modules'
 import { Button } from 'antd'
 
-import styles from './index.less'
+import * as styles from './index.less'
 import Http from '../../config/http'
 
 class Home extends Component {

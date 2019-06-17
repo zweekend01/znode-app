@@ -2,10 +2,11 @@ const express = require('express')
 const { UserController } = require('../../controllers/api')
 
 const router = express.Router()
-const USER_VERSION = '/v1/user'
+const VERSION = '/v1'
+const PREFIX = `${VERSION}/users`
 
-router.post(`${USER_VERSION}/register`, UserController.register)
-router.post(`${USER_VERSION}/login`, UserController.login)
-router.post(`${USER_VERSION}/logout`, UserController.logout)
+router.post(`${PREFIX}/register`, UserController.register)
+router.post(`${PREFIX}/login`, UserController.login)
+router.post(`${PREFIX}/logout`, UserController.logout)
 
 module.exports = router

@@ -3,9 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  resolve: { extensions: ['.js', '.jsx'] },
+  resolve: {
+    extensions: ['.ts', '.tsx'],
+    alias: {
+      '@': path.join(__dirname, '../client')
+    }
+  },
   entry: {
-    index: path.join(__dirname, '../client/index.js')
+    index: path.join(__dirname, '../client/index.ts')
   },
   output: {
     path: path.join(__dirname, '../public'),
@@ -16,18 +21,18 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        use: 'eslint-loader',
+        test: /\.(ts|tsx)$/,
+        use: 'tslint-loader',
         exclude: [path.join(__dirname, '../node_modules')]
       },
       {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
         exclude: [path.join(__dirname, '../node_modules')]
       },
       {
         test: /\.txt$/,
-        use: 'raw-loader',
+        use: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff|woff2)$/,
@@ -40,11 +45,13 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader',
+            loader: 'typings-for-css-modules-loader',
             options: {
               modules: true,
-              importLoaders: 2,
-              camelCase: true
+              namedExport: true,
+              camelCase: true,
+              minimize: true,
+              localIdentName: '[local]_[hash:base64:5]'
             }
           },
           {
@@ -80,7 +87,7 @@ module.exports = {
             }
           }
         ],
-        include: /node_modules/,
+        include: /node_modules/
       }
     ]
   },

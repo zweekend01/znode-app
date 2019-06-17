@@ -1,0 +1,6 @@
+exports.CREATE_TABLE = `
+  CREATE TABLE IF NOT EXISTS topics (
+    id  BIGINT NOT NULL AUTO_INCREMENT,
+
+  );
+`
