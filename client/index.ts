@@ -5,7 +5,5 @@ import App from './App';
 import 'regenerator-runtime/runtime';
 import './styles/index.less';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root') as HTMLElement
-);
+ReactDOM.render(React.createElement(App, null), document.getElementById('root') as HTMLElement);
+

@@ -7,15 +7,14 @@ import { Spin } from 'antd';
 import Home from './pages/Home';
 import styles from './App.less';
 
-export interface IAppProps {
 
-}
+declare var window: Window & { eventEmitter: { on: Function } | null };
 export interface IAppState {
   loading: boolean;
   loadingText: string;
 }
 
-export default class App extends Component<IAppProps, IAppState> {
+class App extends Component<any, IAppState> {
   state: IAppState = {
     loading: false,
     loadingText: ''
@@ -23,13 +22,13 @@ export default class App extends Component<IAppProps, IAppState> {
 
   componentDidMount() {
     // 设置全局的EventBus,挂载在window上
-    // window.eventEmitter = new EventEmitter();
-    // window.eventEmitter.on('startLoading', this.onStartLoading);
-    // window.eventEmitter.on('stopLoading', this.onStopLoading);
+    window.eventEmitter = new EventEmitter();
+    window.eventEmitter.on('startLoading', this.onStartLoading);
+    window.eventEmitter.on('stopLoading', this.onStopLoading);
   }
 
   componentWillUnmount() {
-    // window.eventEmitter = null;
+    window.eventEmitter = null;
   }
 
   onStartLoading = (loadingText: string) => {
@@ -58,4 +57,4 @@ export default class App extends Component<IAppProps, IAppState> {
   }
 }
 
-// export default hot(CSSModules(App, styles));
+export default hot(CSSModules(App, styles));
