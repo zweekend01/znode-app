@@ -235,7 +235,7 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
     raw-loader \
     url-loader \
     style-loader \
-    css-loader \
+    typings-for-css-modules-loader \
     postcss-loader \
     postcss-import \
     postcss-preset-env \
@@ -251,11 +251,10 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
     cross-env \
     rimraf
 
-  $ npm i -S react-hot-loader
+  $ npm i -S react-hot-loader @types/react-hot-loader
 ```
 
 - 配置 webpack.config.client.js、webpack.config.index.js、tsconfig.json、postcss.config.js 文件
-
 
 ```javascript
 // build/webpack.config.client.js => 开发环境和生产环境共用的配置
@@ -304,11 +303,13 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader',
+            loader: 'typings-for-css-modules-loader',
             options: {
               modules: true,
-              importLoaders: 2,
-              camelCase: true
+              namedExport: true,
+              camelCase: true,
+              minimize: true,
+              localIdentName: '[local]_[hash:base64:5]'
             }
           },
           {
@@ -421,8 +422,8 @@ module.exports = {
       - layout
     - config        => 项目的一些配置
     - pages         => 页面组件
+    - services      => http请求
     - stores        => 状态管理
-      - services      => http请求
     - styles        => 项目通用的样式，以及全局的样式兼容性设置
     - utils         => 工具库
     - App.less
@@ -435,6 +436,85 @@ module.exports = {
 ```
 
 #### 2.1.4 业务开发
+
+- 安装相关 npm packages:
+
+```cmd
+  $ npm i -S
+    react \
+    @types/react \
+    react-dom \
+    @types/react-dom \
+    react-css-modules \
+    @types/react-css-modules \
+    antd \
+    ts-import-plugin \
+    axios \
+    react-router-dom \
+    @types/react-router-dom \
+    mobx \
+    mobx-react \
+    await-to-js \
+    joi-browser
+```
+
+> (1) 配置全局的样式
+
+解决 html 元素在各浏览器中兼容性的问题、实现基于 rem 的弹性布局
+
+> (2) 解决 antd 组件库按需加载以及样式打包的问题
+
+配置 webpack.config.client.js 如下：
+
+```javascript
+const tsImportPluginFactory = require('ts-import-plugin');
+
+module.exports = {
+  modules: {
+    rules: [
+      // 解决按需加载
+      {
+        test: /\.(tsx|ts)$/,
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory( /** options */) ]
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        },
+        exclude: /node_modules/
+      },
+      // 解决样式冲突
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss'
+            }
+          }
+        ],
+        include: /node_modules/
+      }
+    ]
+  }
+};
+```
+
+> (3) 基于 axios 封装 http 请求
+
+请求 loading 的开启与关闭、请求成功的统一提示、请求失败的统一提示
 
 #### 2.1.5 性能优化
 

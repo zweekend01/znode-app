@@ -28,6 +28,15 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         use: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [tsImportPluginFactory( /** options */)]
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        },
         exclude: [path.join(__dirname, '../node_modules')]
       },
       {
@@ -75,7 +84,7 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader',
+            loader: 'typings-for-css-modules-loader',
             options: {
               importLoaders: 1
             }
