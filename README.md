@@ -16,7 +16,7 @@
 
 - webpack
 - typescript
-- react, react-router4, mobx, mobx-react、antd
+- react, react-router4, mobx, mobx-react, antd
 - axios
 
 #### 2.1.2 工程架构
@@ -25,7 +25,7 @@
 
 editorconfig 可以对空白行、缩进等编码格式进行格式化，这种格式化与编程语言无关，有助于团队协作，配置步骤如下：
 
-- VSCode 安装 'EditorConfig for VS Code' 插件（默认下载 editorconfig npm package），该插件会在工作目录调用 editorconfig npm package
+- IDE 安装 editorconfig 插件（默认下载 editorconfig npm package），该插件会在工作目录调用 editorconfig npm package
 - 在工程目录下，添加 .editorconfig 文件，对全局的 editorconfig 进行相关配置
 
 ```conf
@@ -44,7 +44,7 @@ editorconfig 可以对空白行、缩进等编码格式进行格式化，这种�
 
 tslint 是 typescript 编程格式的校验工具，有助于团队的编程格式统一，配置步骤如下：
 
-- VSCode 安装 'TSLint' 插件，该插件会在工作目录调用 tslint 相关的 npm package
+- IDE 安装 tslint 插件，该插件会在工作目录调用 tslint 相关的 npm package
 - 安装相关的 npm package：
 
 ```cmd
@@ -54,7 +54,6 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
 - 在工程目录下，添加 tslint.json 文件，对全局的 tslint 进行相关配置，在 client/ 目录下添加 tslint.json 文件，对 client/ 目录的 tslint 进行相关配置
 
 ```json
-// ./tslint.json
 {
   "rules": {
     "arrow-return-shorthand": true,
@@ -186,7 +185,6 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
 ```
 
 ```json
-// ./client/tslint.json
 {
   "extends": ["../tslint.json", "tslint-react"],
   "rules": {
@@ -270,7 +268,7 @@ module.exports = {
     }
   },
   entry: {
-    index: path.join(__dirname, '../client/index.ts')
+    index: path.join(__dirname, 'client/index.tsx')
   },
   output: {
     path: path.join(__dirname, '../public'),
@@ -367,12 +365,11 @@ module.exports = clientConfig;
 ```
 
 ```json
-// tsconfig.json
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "ES2015",
-    "lib": ["DOM", "ESNEXT"],
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
     "jsx": "react",
     "sourceMap": true,
     "strict": true
@@ -381,7 +378,7 @@ module.exports = clientConfig;
 }
 ```
 
-```js
+```javascript
 // .postcss.config.js
 module.exports = {
   plugins: {
@@ -428,9 +425,9 @@ module.exports = {
     - utils         => 工具库
     - App.less
     - App.tsx
-    - declare.d.ts
+    - app.d.ts
     - index.html
-    - index.ts
+    - index.tsx
     - Router.tsx
     - tslint.json
 ```
@@ -518,7 +515,11 @@ module.exports = {
 
 #### 2.1.5 性能优化
 
-#### 2.1.6 打包上线
+#### 2.1.6 安全防御
+
+#### 2.1.7 单元测试
+
+#### 2.1.8 打包上线
 
 ### 2.2 Server Side
 
@@ -602,6 +603,8 @@ module.exports = {
 
 #### 2.2.4 业务开发
 
-#### 2.2.5 性能优化
+#### 2.2.5 单元测试
 
-#### 2.2.6 部署上线
+#### 2.2.6 性能优化
+
+#### 2.2.7 部署上线

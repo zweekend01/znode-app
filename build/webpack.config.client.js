@@ -1,5 +1,5 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -10,7 +10,7 @@ module.exports = {
     }
   },
   entry: {
-    index: path.join(__dirname, '../client/index.ts')
+    index: path.join(__dirname, '../client/index.tsx')
   },
   output: {
     path: path.join(__dirname, '../public'),
@@ -78,7 +78,7 @@ module.exports = {
         ],
         exclude: [path.join(__dirname, '../node_modules')]
       },
-      // 针对antd的样式
+      // 针对 antd 的样式
       {
         test: /\.css$/,
         use: [
@@ -104,7 +104,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       minify: { removeAttributeQuotes: true },
       template: path.join(__dirname, '../client/index.html'),
-      filename: 'index.html'
+      filename: 'index.d.ts.tsx.html'
     })
   ]
-}
+};

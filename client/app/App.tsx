@@ -4,9 +4,7 @@ import CSSModules from 'react-css-modules';
 import { EventEmitter } from 'eventemitter3';
 import { Spin } from 'antd';
 
-import Home from './pages/Home';
 import styles from './App.less';
-
 
 declare var window: Window & { eventEmitter: { on: Function } | null };
 export interface IAppState {
@@ -50,7 +48,7 @@ class App extends Component<any, IAppState> {
           tip={loadingText}
           size="large"
         >
-          <Home />
+          hello world
         </Spin>
       </div>
     );

@@ -1,13 +1,13 @@
-const path = require('path')
-const webpack = require('webpack')
-const clientConfig = require('./webpack.config.client')
+const path = require('path');
+const webpack = require('webpack');
+const clientConfig = require('./webpack.config.client');
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
-  clientConfig.mode = 'development'
-  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
-  clientConfig.devtool = '#cheap-module-eval-source-map'
+  clientConfig.mode = 'development';
+  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+  clientConfig.devtool = '#cheap-module-eval-source-map';
   clientConfig.devServer = {
     host: '0.0.0.0',
     port: '8888',
@@ -20,6 +20,8 @@ if (isDev) {
       '/api': 'http://localhost:3000'
     }
   }
+} else {
+
 }
 
-module.exports = [clientConfig]
+module.exports = [clientConfig];
