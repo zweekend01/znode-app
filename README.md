@@ -29,15 +29,15 @@ editorconfig 可以对空白行、缩进等编码格式进行格式化，这种�
 - 在工程目录下，添加 .editorconfig 文件，对全局的 editorconfig 进行相关配置
 
 ```conf
-  root = true
+root = true
 
-  [*]
-  charset = utf-8
-  indent_style = space
-  indent_size = 2
-  end_of_line = lf
-  insert_final_newline= true
-  trim_trailing_whitespace = true
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline= true
+trim_trailing_whitespace = true
 ```
 
 > (2) tslint
@@ -48,7 +48,7 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
 - 安装相关的 npm package：
 
 ```cmd
-  $ npm i -D tslint tslint-react typescript
+$ npm i -D tslint tslint-react typescript
 ```
 
 - 在工程目录下，添加 tslint.json 文件，对全局的 tslint 进行相关配置，在 client/ 目录下添加 tslint.json 文件，对 client/ 目录的 tslint 进行相关配置
@@ -200,7 +200,7 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
 - 安装相关 npm package
 
 ```cmd
-  $ npm i -D husky
+$ npm i -D husky
 ```
 
 - 在 package.json 文件中，添加 npm script 和 husky.hooks 如下，在代码提交时用 eslint 检测代码规范：
@@ -227,29 +227,29 @@ tslint 是 typescript 编程格式的校验工具，有助于团队的编程格�
 - 安装相关 npm package：
 
 ```cmd
-  $ npm i -D \
-    tslint-loader \
-    ts-loader \
-    raw-loader \
-    url-loader \
-    style-loader \
-    typings-for-css-modules-loader \
-    postcss-loader \
-    postcss-import \
-    postcss-preset-env \
-    cssnano \
-    autoprefixer \
-    postcss-flexbugs-fixes \
-    less-loader \
-    less \
-    html-webpack-plugin \
-    webpack-dev-server \
-    webpack \
-    webpack-cli \
-    cross-env \
-    rimraf
+$ npm i -D \
+  tslint-loader \
+  ts-loader \
+  raw-loader \
+  url-loader \
+  style-loader \
+  typings-for-css-modules-loader \
+  postcss-loader \
+  postcss-import \
+  postcss-preset-env \
+  cssnano \
+  autoprefixer \
+  postcss-flexbugs-fixes \
+  less-loader \
+  less \
+  html-webpack-plugin \
+  webpack-dev-server \
+  webpack \
+  webpack-cli \
+  cross-env \
+  rimraf
 
-  $ npm i -S react-hot-loader @types/react-hot-loader
+$ npm i -S react-hot-loader @types/react-hot-loader
 ```
 
 - 配置 webpack.config.client.js、webpack.config.index.js、tsconfig.json、postcss.config.js 文件
@@ -412,24 +412,21 @@ module.exports = {
 #### 2.1.3 项目架构
 
 ```cmd
-  - client
-    - assets        => 静态资源
-    - components    => 项目的通用组件，包括布局组件和高阶组件等
-      - hoc
-      - layout
-    - config        => 项目的一些配置
-    - pages         => 页面组件
-    - services      => http请求
-    - stores        => 状态管理
-    - styles        => 项目通用的样式，以及全局的样式兼容性设置
-    - utils         => 工具库
-    - App.less
-    - App.tsx
+- client
+  - app           => 各领域模块
     - app.d.ts
-    - index.html
-    - index.tsx
-    - Router.tsx
-    - tslint.json
+    - App.less
+    - app.module.ts
+    - App.tsx
+    - AppRouter.tsx
+  - assets        => 项目通用资源
+  - config        => 项目通用配置
+  - styles        => 项目通用的样式，以及全局的样式兼容性设置
+  - utils         => 项目通用的工具库
+  - global.d.ts
+  - index.html
+  - index.tsx
+  - tslint.json
 ```
 
 #### 2.1.4 业务开发
@@ -437,22 +434,26 @@ module.exports = {
 - 安装相关 npm packages:
 
 ```cmd
-  $ npm i -S
-    react \
-    @types/react \
-    react-dom \
-    @types/react-dom \
-    react-css-modules \
-    @types/react-css-modules \
-    antd \
-    ts-import-plugin \
-    axios \
-    react-router-dom \
-    @types/react-router-dom \
-    mobx \
-    mobx-react \
-    await-to-js \
-    joi-browser
+$ npm i -D
+  @types/react \
+  @types/react-dom \
+  @types/react-router-dom \
+  @types/react-css-modules
+```
+
+```cmd
+$ npm i -S
+  react \
+  react-dom \
+  react-router-dom \
+  react-css-modules \
+  antd \
+  ts-import-plugin \
+  axios \
+  mobx \
+  mobx-react \
+  await-to-js \
+  joi-browser
 ```
 
 > (1) 配置全局的样式
@@ -603,8 +604,10 @@ module.exports = {
 
 #### 2.2.4 业务开发
 
-#### 2.2.5 单元测试
+#### 2.2.5 性能优化
 
-#### 2.2.6 性能优化
+#### 2.2.6 安全防御
 
-#### 2.2.7 部署上线
+#### 2.2.7 单元测试
+
+#### 2.2.8 部署上线

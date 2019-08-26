@@ -1,4 +1,5 @@
 const path = require('path');
+const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -27,14 +28,12 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          getCustomTransformers: () => ({
-            before: [tsImportPluginFactory( /** options */)]
-          }),
-          compilerOptions: {
-            module: 'es2015'
+        use: {
+          loader: "ts-loader",
+          options: {
+            getCustomTransformers: () => ({
+              before: [tsImportPluginFactory( /** options */)]
+            })
           }
         },
         exclude: [path.join(__dirname, '../node_modules')]

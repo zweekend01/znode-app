@@ -25,7 +25,12 @@
   },
   "homepage": "https://github.com/zweekend01/znode-app#readme",
   "devDependencies": {
-    "@typescript-eslint/parser": "^1.10.2",
+    "@types/node": "^12.0.8",
+    "@types/react": "^16.8.20",
+    "@types/react-css-modules": "^4.6.2",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-hot-loader": "^4.1.0",
+    "@types/react-router-dom": "^4.3.4",
     "autoprefixer": "^9.5.1",
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.10",
@@ -54,12 +59,6 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
-    "@types/node": "^12.0.8",
-    "@types/react": "^16.8.20",
-    "@types/react-css-modules": "^4.6.2",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-hot-loader": "^4.1.0",
-    "@types/react-router-dom": "^4.3.4",
     "antd": "^3.18.1",
     "await-to-js": "^2.1.1",
     "axios": "^0.18.0",

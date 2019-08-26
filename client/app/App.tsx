@@ -1,58 +1,19 @@
 import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import CSSModules from 'react-css-modules';
-import { EventEmitter } from 'eventemitter3';
-import { Spin } from 'antd';
 
 import styles from './App.less';
 
-declare var window: Window & { eventEmitter: { on: Function } | null };
-export interface IAppState {
-  loading: boolean;
-  loadingText: string;
-}
-
-class App extends Component<any, IAppState> {
-  state: IAppState = {
-    loading: false,
-    loadingText: ''
-  };
-
-  componentDidMount() {
-    // 设置全局的EventBus,挂载在window上
-    window.eventEmitter = new EventEmitter();
-    window.eventEmitter.on('startLoading', this.onStartLoading);
-    window.eventEmitter.on('stopLoading', this.onStopLoading);
-  }
-
-  componentWillUnmount() {
-    window.eventEmitter = null;
-  }
-
-  onStartLoading = (loadingText: string) => {
-    this.setState({ loadingText, loading: true });
-  }
-
-  onStopLoading = () => {
-    this.setState({ loading: false, loadingText: '' });
-  }
+class App extends Component<any, any> {
 
   render() {
-    const { loading, loadingText } = this.state;
-
     return (
-      <div styleName="wrapper">
-        <Spin
-          wrapperClassName={styles.spinWrapper}
-          spinning={loading}
-          tip={loadingText}
-          size="large"
-        >
-          hello world
-        </Spin>
+      <div styleName="layout">
+        Hello World
       </div>
     );
   }
+
 }
 
 export default hot(CSSModules(App, styles));
