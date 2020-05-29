@@ -1,14 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
-const clientConfig = require('./webpack.config.client');
+const baseConfig = require('./webpack.config.base');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
-  clientConfig.mode = 'development';
-  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-  clientConfig.devtool = '#cheap-module-eval-source-map';
-  clientConfig.devServer = {
+  baseConfig.mode = 'development';
+  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+  baseConfig.devtool = '#cheap-module-eval-source-map';
+  baseConfig.devServer = {
     host: '0.0.0.0',
     port: '8888',
     contentBase: path.join(__dirname, '../public'),
@@ -24,4 +24,4 @@ if (isDev) {
 
 }
 
-module.exports = [clientConfig];
+module.exports = baseConfig;

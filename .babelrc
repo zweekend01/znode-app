@@ -1,11 +1,6 @@
 {
-  "presets": [
-    ["@babel/preset-env", { "loose": true }],
-    "@babel/preset-react"
-  ],
+  "presets": [["@babel/preset-typescript", { "loose": true }]],
   "plugins": [
-    "react-hot-loader/babel",
-    "@babel/plugin-proposal-class-properties",
-    ["import", { "libraryName": "antd", "style": "css" }, "ant"],
+    "react-hot-loader/babel"
   ]
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { App } from './app/app.module';
+import App from './page/App';
 import 'regenerator-runtime/runtime';
-import './styles/index.less';
+import './style/index.less';
 
 ReactDOM.render(
   <App />,

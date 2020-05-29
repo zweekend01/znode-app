@@ -12,14 +12,80 @@
 
 #### 2.1.1 技术选型
 
-前端技术选型包括：
-
+- npm
+- typescript, react, antd, react-router4, mobx, mobx-react
 - webpack
-- typescript
-- react, react-router4, mobx, mobx-react, antd
-- axios
 
 #### 2.1.2 工程架构
+
+1. 依赖管理
+
+> (1) 业务开发依赖
+
+```cmd
+$ npm i -S
+  react \
+  react-css-modules \
+  antd \
+  ts-import-plugin \
+  react-router-dom \
+  redux \
+  react-redux \
+  axios \
+  await-to-js \
+  react-dom
+  react-hot-loader
+```
+
+```cmd
+$ npm i -D
+  @types/react \
+  @types/react-dom \
+  @types/react-router-dom \
+  @types/react-css-modules \
+  @types/react-hot-loader
+```
+
+> (2) 项目构建依赖
+
+```cmd
+$ npm i -D typescript tslint tslint-react
+```
+
+```cmd
+$ npm i -D husky
+```
+
+```cmd
+$ npm i -D \
+  raw-loader \
+  url-loader \
+  style-loader \
+  typings-for-css-modules-loader \
+  postcss-loader \
+  postcss-import \
+  postcss-preset-env \
+  cssnano \
+  autoprefixer \
+  postcss-flexbugs-fixes \
+  less-loader \
+  less \
+  tslint-loader \
+  babel-loader \
+  @babel/core \
+  @babel/preset-typescript \
+  fork-ts-checker-webpack-plugin \
+  html-webpack-plugin \
+  webpack-dev-server \
+  webpack \
+  webpack-cli \
+  cross-env \
+  rimraf
+
+  $ npm i -S react-hot-loader
+```
+
+2. 搭建项目构建工作流
 
 > (1) editorconfig
 
@@ -40,18 +106,12 @@ insert_final_newline= true
 trim_trailing_whitespace = true
 ```
 
-> (2) tslint
+> (2) eslint
 
-tslint 是 typescript 编程格式的校验工具，有助于团队的编程格式统一，配置步骤如下：
+eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队的编程格式统一，配置步骤如下：
 
-- IDE 安装 tslint 插件，该插件会在工作目录调用 tslint 相关的 npm package
-- 安装相关的 npm package：
-
-```cmd
-$ npm i -D tslint tslint-react typescript
-```
-
-- 在工程目录下，添加 tslint.json 文件，对全局的 tslint 进行相关配置，在 client/ 目录下添加 tslint.json 文件，对 client/ 目录的 tslint 进行相关配置
+- IDE 安装 eslint 插件，该插件会在工作目录调用 eslint 相关的 npm package
+- 在工程目录下，添加 tslint.json 文件，对全局的 tslint 进行相关配置，在 src/ 目录下添加 tslint.json 文件，对 src/ 目录的 tslint 进行相关配置
 
 ```json
 {
@@ -197,13 +257,7 @@ $ npm i -D tslint tslint-react typescript
 
 避免团队成员上传不符合规范的代码，配置步骤如下：
 
-- 安装相关 npm package
-
-```cmd
-$ npm i -D husky
-```
-
-- 在 package.json 文件中，添加 npm script 和 husky.hooks 如下，在代码提交时用 eslint 检测代码规范：
+- package.json 文件中，添加 npm script 和 husky.hooks 如下，在代码提交时用 eslint 检测代码规范：
 
 ```json
 {
@@ -224,51 +278,69 @@ $ npm i -D husky
 
 开发环境和生产环境有部分配置重叠，配置步骤如下:
 
-- 安装相关 npm package：
-
-```cmd
-$ npm i -D \
-  tslint-loader \
-  ts-loader \
-  raw-loader \
-  url-loader \
-  style-loader \
-  typings-for-css-modules-loader \
-  postcss-loader \
-  postcss-import \
-  postcss-preset-env \
-  cssnano \
-  autoprefixer \
-  postcss-flexbugs-fixes \
-  less-loader \
-  less \
-  html-webpack-plugin \
-  webpack-dev-server \
-  webpack \
-  webpack-cli \
-  cross-env \
-  rimraf
-
-$ npm i -S react-hot-loader @types/react-hot-loader
-```
-
-- 配置 webpack.config.client.js、webpack.config.index.js、tsconfig.json、postcss.config.js 文件
+- 配置 postcss.config.js、.babelrc、tsconfig.json、webpack.config.base.js、webpack.config.index.js 文件
 
 ```javascript
-// build/webpack.config.client.js => 开发环境和生产环境共用的配置
+// .postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-import': {},
+    'postcss-preset-env': {},
+    cssnano: {},
+    autoprefixer: {
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9' // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009'
+    },
+    'postcss-flexbugs-fixes': {}
+  }
+};
+```
+```json
+// .babelrc
+{
+  "presets": [["@babel/preset-typescript", { "loose": true }]],
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
+}
+```
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": ["./src/**/*"]
+}
+```
+
+```javascript
+// conf/webpack.config.base.js => 开发环境和生产环境共用的配置
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   resolve: {
+    modules: ['node_modules'],
     extensions: ['.ts', '.tsx'],
     alias: {
-      '@': path.join(__dirname, '../client')
+      'react-dom': '@hot-loader/react-dom',
+      '@': path.join(__dirname, '../src')
     }
   },
   entry: {
-    index: path.join(__dirname, 'client/index.tsx')
+    index: path.join(__dirname, 'src/index.tsx')
   },
   output: {
     path: path.join(__dirname, '../public'),
@@ -278,23 +350,12 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(ts|tsx)$/,
-        use: 'tslint-loader',
-        exclude: [path.join(__dirname, '../node_modules')]
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        exclude: [path.join(__dirname, '../node_modules')]
-      },
-      {
         test: /\.txt$/,
         use: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: [{ loader: 'url-loader', options: { limie: 8192 } }]
+        use: [{ loader: 'url-loader', options: { limit: 8192 } }]
       },
       {
         test: /\.less$/,
@@ -324,13 +385,25 @@ module.exports = {
           }
         ],
         exclude: [path.join(__dirname, '../node_modules')]
-      }
+      },
+      {
+        enforce: 'pre',
+        test: /\.(ts|tsx)$/,
+        use: 'tslint-loader',
+        exclude: [path.join(__dirname, '../node_modules')]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'babel-loader',
+        exclude: [path.join(__dirname, '../node_modules')]
+      },
     ]
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       minify: { removeAttributeQuotes: true },
-      template: path.join(__dirname, '../client/index.html'),
+      template: path.join(__dirname, '../src/index.html'),
       filename: 'index.html'
     })
   ]
@@ -341,15 +414,15 @@ module.exports = {
 // build/webpack.config.index.js => 开发环境和生产环境不同的配置
 const path = require('path');
 const webpack = require('webpack');
-const clientConfig = require('./webpack.config.client');
+const baseConfig = require('./webpack.config.base');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
-  clientConfig.mode = 'development';
-  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-  clientConfig.devtool = '#cheap-module-eval-source-map';
-  clientConfig.devServer = {
+  baseConfig.mode = 'development';
+  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+  baseConfig.devtool = '#cheap-module-eval-source-map';
+  baseConfig.devServer = {
     host: '0.0.0.0',
     port: '8888',
     contentBase: path.join(__dirname, '../public'),
@@ -361,51 +434,16 @@ if (isDev) {
 } else {
 }
 
-module.exports = clientConfig;
-```
-
-```json
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["dom", "esnext"],
-    "jsx": "react",
-    "sourceMap": true,
-    "strict": true
-  },
-  "include": ["./client/**/*"]
-}
-```
-
-```javascript
-// .postcss.config.js
-module.exports = {
-  plugins: {
-    'postcss-import': {},
-    'postcss-preset-env': {},
-    cssnano: {},
-    autoprefixer: {
-      browsers: [
-        '>1%',
-        'last 4 versions',
-        'Firefox ESR',
-        'not ie < 9' // React doesn't support IE8 anyway
-      ],
-      flexbox: 'no-2009'
-    },
-    'postcss-flexbugs-fixes': {}
-  }
-};
+module.exports = baseConfig;
 ```
 
 - 在 package.json 文件中添加 npm scripts
 
 ```json
 {
-  "dev:build": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.index.js",
-  "clear": "rimraf public",
-  "pro:build": "npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.config.index.js"
+  "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.index.js",
+  "prod": "npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.config.index.js",
+  "clear": "rimraf public"
 }
 ```
 
@@ -413,16 +451,18 @@ module.exports = {
 
 ```cmd
 - client
-  - app           => 各领域模块
-    - app.d.ts
-    - App.less
-    - app.module.ts
-    - App.tsx
-    - AppRouter.tsx
-  - assets        => 项目通用资源
-  - config        => 项目通用配置
-  - styles        => 项目通用的样式，以及全局的样式兼容性设置
-  - utils         => 项目通用的工具库
+  - api           => 接口请求
+  - asset         => 静态资源
+  - component     => 项目通用组件，包括布局组件、高阶组件、业务组件等
+    - layout
+    - hoc
+  - conf          => 项目配置
+  - page          => 页面组件
+  - router        => 路由组件
+  - store         => 状态管理
+  - style         => 项目通用的样式，以及全局的样式兼容性设置
+  - type          => 类型定义
+  - util          => 项目通用的工具库
   - global.d.ts
   - index.html
   - index.tsx
@@ -431,38 +471,13 @@ module.exports = {
 
 #### 2.1.4 业务开发
 
-- 安装相关 npm packages:
-
-```cmd
-$ npm i -D
-  @types/react \
-  @types/react-dom \
-  @types/react-router-dom \
-  @types/react-css-modules
-```
-
-```cmd
-$ npm i -S
-  react \
-  react-dom \
-  react-router-dom \
-  react-css-modules \
-  antd \
-  ts-import-plugin \
-  axios \
-  mobx \
-  mobx-react \
-  await-to-js \
-  joi-browser
-```
-
 > (1) 配置全局的样式
 
 解决 html 元素在各浏览器中兼容性的问题、实现基于 rem 的弹性布局
 
 > (2) 解决 antd 组件库按需加载以及样式打包的问题
 
-配置 webpack.config.client.js 如下：
+配置 webpack.config.base.js 如下：
 
 ```javascript
 const tsImportPluginFactory = require('ts-import-plugin');
@@ -520,94 +535,4 @@ module.exports = {
 
 #### 2.1.7 单元测试
 
-#### 2.1.8 打包上线
-
-### 2.2 Server Side
-
-#### 2.2.1 技术选型
-
-后端技术选型包括：
-
-- typescript
-- express
-- mysql
-
-#### 2.2.2 工程架构
-
-> (1) editconfig
-
-> (2) eslint
-
-> (3) git
-
-> (4) nodemon
-
-- 安装相关 npm package:
-
-```cmd
-  $ npm i nodemon -D
-```
-
-- 配置 nodemon.json 文件
-
-```json
-{
-  "restartable": "rs",
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules",
-    "tslint.json",
-    "build",
-    "client",
-    "public"
-  ],
-  "env": {
-    "NODE_ENV": "development"
-  },
-  "verbose": true,
-  "ext": "ts"
-}
-```
-
-- 在 package.json 文件中添加 npm scripts
-
-```json
-{
-  "scripts": {
-    "dev:start": "cross-env NODE_ENV=development node server/bin/www.ts",
-    "dev:monstart": "nodemon server/bin/www.ts",
-    "pro:start": "cross-env NODE_ENV=production node server/bin/www.ts",
-    "pro:monstart": "nodemon server/bin/www.ts"
-  }
-}
-```
-
-#### 2.2.3 项目架构
-
-```cmd
-  - server
-    - api
-    - apidoc
-    - bin
-      - www.js
-    - config
-    - controllers
-    - middlewares
-    - models
-    - public
-    - routers
-    - sql
-    - utils
-    - views
-    - app.js
-```
-
-#### 2.2.4 业务开发
-
-#### 2.2.5 性能优化
-
-#### 2.2.6 安全防御
-
-#### 2.2.7 单元测试
-
-#### 2.2.8 部署上线
+#### 2.1.8 项目构建
