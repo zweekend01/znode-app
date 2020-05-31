@@ -11,3 +11,4 @@ const App = () => (
 );
 
 export default hot(CSSModules(App, styles));
+

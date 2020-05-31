@@ -4,10 +4,14 @@
   "description": "基于 NodeJS 实现的博客网站",
   "main": "index.js",
   "scripts": {
-    "lint": "tslint --ext .ts --ext .tsx src/",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config conf/webpack.config.index.js",
-    "prod": "npm run clear && cross-env NODE_ENV=product webpack --config conf/webpack.config.index.js",
-    "clear": "rimraf public"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config conf/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config conf/webpack.config.js",
+    "lint": "eslint --ext .ts --ext .tsx src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -26,46 +30,58 @@
     "@types/react": "^16.9.35",
     "@types/react-css-modules": "^4.6.2",
     "@types/react-dom": "^16.9.8",
+    "@types/react-hot-loader": "^4.1.1",
     "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
     "autoprefixer": "^9.8.0",
     "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
     "cssnano": "^4.1.10",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-standard": "^4.0.1",
     "fork-ts-checker-webpack-plugin": "^4.1.6",
     "html-webpack-plugin": "^4.3.0",
-    "husky": "^4.2.5",
     "less": "^3.11.1",
     "less-loader": "^6.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
+    "px2rem-loader": "^0.1.9",
     "raw-loader": "^4.0.1",
     "rimraf": "^3.0.2",
-    "style-loader": "^1.2.1",
-    "ts-loader": "^7.0.5",
-    "tslint": "^6.1.2",
-    "tslint-loader": "^3.5.4",
-    "tslint-react": "^5.0.0",
     "typescript": "^3.9.3",
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "antd": "^4.2.5",
+    "antd": "^4.3.0",
     "await-to-js": "^2.1.1",
     "axios": "^0.19.2",
+    "dayjs": "^1.8.28",
     "react": "^16.13.1",
     "react-css-modules": "^4.7.11",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5",
-    "ts-import-plugin": "^1.6.6"
+    "redux": "^4.0.5"
   }
 }

@@ -33,16 +33,15 @@ $ npm i -S
   react-redux \
   axios \
   await-to-js \
-  react-dom
-  react-hot-loader
+  react-dom \
 ```
 
 ```cmd
 $ npm i -D
   @types/react \
-  @types/react-dom \
-  @types/react-router-dom \
   @types/react-css-modules \
+  @types/react-router-dom \
+  @types/react-dom \
   @types/react-hot-loader
 ```
 
@@ -58,29 +57,47 @@ $ npm i -D husky
 
 ```cmd
 $ npm i -D \
+  webpack \
+  webpack-cli \
+  webpack-dev-server \
+  webpack-merge \
+  elsint \
+  typescript \
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin \
+  eslint-plugin-import \
+  eslint-plugin-node \
+  eslint-plugin-promise \
+  eslint-plugin-standard \
+  eslint-config-standard \
+  eslint-plugin-jsx-a11y \
+  eslint-plugin-react \
+  eslint-plugin-react-hooks \
+  eslint-config-airbnb-typescript \
+  eslint-loader \
+  @babel/core \
+  @babel/preset-typescript \
+  babel-loader \
+  fork-ts-checker-webpack-plugin \
   raw-loader \
   url-loader \
-  style-loader \
+  less-loader \
+  less \
+  css-loader \
   typings-for-css-modules-loader \
+  px2rem-loader \
   postcss-loader \
   postcss-import \
   postcss-preset-env \
   cssnano \
   autoprefixer \
   postcss-flexbugs-fixes \
-  less-loader \
-  less \
-  tslint-loader \
-  babel-loader \
-  @babel/core \
-  @babel/preset-typescript \
-  fork-ts-checker-webpack-plugin \
+  style-loader \
+  mini-css-extract-plugin \
+  optimize-css-assets-webpack-plugin \
   html-webpack-plugin \
-  webpack-dev-server \
-  webpack \
-  webpack-cli \
+  clean-webpack-plugin \
   cross-env \
-  rimraf
 
   $ npm i -S react-hot-loader
 ```
@@ -111,145 +128,25 @@ trim_trailing_whitespace = true
 eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队的编程格式统一，配置步骤如下：
 
 - IDE 安装 eslint 插件，该插件会在工作目录调用 eslint 相关的 npm package
-- 在工程目录下，添加 tslint.json 文件，对全局的 tslint 进行相关配置，在 src/ 目录下添加 tslint.json 文件，对 src/ 目录的 tslint 进行相关配置
+- 在工程目录下，添加 .eslintrc 文件
 
 ```json
 {
-  "rules": {
-    "arrow-return-shorthand": true,
-    "callable-types": true,
-    "class-name": true,
-    "comment-format": [
-      true,
-      "check-space"
-    ],
-    "curly": true,
-    "deprecation": {
-      "severity": "warn"
-    },
-    "eofline": true,
-    "forin": true,
-    "import-blacklist": [
-      true,
-      "rxjs/Rx"
-    ],
-    "import-spacing": true,
-    "indent": [
-      true,
-      "spaces"
-    ],
-    "interface-over-type-literal": true,
-    "label-position": true,
-    "max-line-length": [
-      true,
-      140
-    ],
-    "member-access": false,
-    "member-ordering": [
-      true,
-      {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
-      }
-    ],
-    "no-arg": true,
-    "no-bitwise": true,
-    "no-console": [
-      true,
-      "debug",
-      "info",
-      "time",
-      "timeEnd",
-      "trace"
-    ],
-    "no-construct": true,
-    "no-debugger": true,
-    "no-duplicate-super": true,
-    "no-empty": false,
-    "no-empty-interface": true,
-    "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
-    "no-misused-new": true,
-    "no-non-null-assertion": true,
-    "no-redundant-jsdoc": true,
-    "no-shadowed-variable": true,
-    "no-string-literal": false,
-    "no-string-throw": true,
-    "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
-    "no-unnecessary-initializer": true,
-    "no-unused-expression": true,
-    "no-use-before-declare": true,
-    "no-var-keyword": true,
-    "object-literal-sort-keys": false,
-    "one-line": [
-      true,
-      "check-open-brace",
-      "check-catch",
-      "check-else",
-      "check-whitespace"
-    ],
-    "prefer-const": true,
-    "quotemark": [
-      true,
-      "single"
-    ],
-    "radix": true,
-    "semicolon": [
-      true,
-      "always"
-    ],
-    "triple-equals": [
-      true,
-      "allow-null-check"
-    ],
-    "typedef-whitespace": [
-      true,
-      {
-        "call-signature": "nospace",
-        "index-signature": "nospace",
-        "parameter": "nospace",
-        "property-declaration": "nospace",
-        "variable-declaration": "nospace"
-      }
-    ],
-    "unified-signatures": true,
-    "variable-name": false,
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-decl",
-      "check-operator",
-      "check-separator",
-      "check-type"
-    ],
-    "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
-    "no-input-rename": true,
-    "no-output-rename": true,
-    "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
-    "directive-class-suffix": true
-  }
-}
-```
-
-```json
-{
-  "extends": ["../tslint.json", "tslint-react"],
-  "rules": {
-    "quotemark": false
-  }
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommend",
+    "standard",
+    "airbnb-typescript"
+  ]
 }
 ```
 
@@ -262,7 +159,7 @@ eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队�
 ```json
 {
   "scripts": {
-    "lint": "tslint --ext .ts --ext .tsx client/"
+    "lint": "eslint --ext .ts --ext .tsx client/"
   },
   "husky": {
     "hooks": {
@@ -278,7 +175,257 @@ eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队�
 
 开发环境和生产环境有部分配置重叠，配置步骤如下:
 
-- 配置 postcss.config.js、.babelrc、tsconfig.json、webpack.config.base.js、webpack.config.index.js 文件
+- 配置 webpack.config.base.js、webpack.config.prod.js、.babelrc、tsconfig.json、postcss.config.js 文件
+
+```javascript
+// conf/webpack.config.base.js => 开发环境和生产环境共用的配置
+const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+/**
+ * 1. JavaScript packing config
+ *  1.1 mode
+ *  1.2 resolve
+ *  1.3 entry
+ *  1.4 module, plugins
+ *    - 校验 typescript
+ *    - 编译 typescript（包括 JSX）
+ *    - 编译普通文本文件
+ *    - 编译和打包图片字体文件
+ *    - 编译和打包 less、css 等样式文件
+ *    - 编译和打包（多）html 文件
+ *
+ * 2. JavaScript compiler config
+ *  2.1 output
+ */
+
+module.exports = {
+  mode: 'production',
+  resolve: {
+    modules: ['node_modules'],
+    extensions: ['.ts', '.tsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+      '@': path.join(__dirname, '../src')
+    }
+  },
+  entry: {
+    index:  ['react-hot-loader/patch', path.join(__dirname, '../src/index.tsx')]
+  },
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.(ts|tsx)$/,
+        use: 'tslint-loader',
+        exclude: [path.join(__dirname, '../node_modules')]
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'babel-loader',
+        exclude: [path.join(__dirname, '../node_modules')]
+      },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff|woff2)$/,
+        use: [
+          { loader: 'url-loader', options: { limit: 8192, name: '[name].[hash:8].[ext]' } }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          // {
+            // loader: 'style-loader',
+            // options: {
+              // insertAt: 'top',
+              // singleton: true
+            // }
+          // },
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              modules: true,
+              namedExport: true,
+              camelCase: true,
+              minimize: true,
+              localIdentName: '[local]_[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'px2rem-loader',
+            options: { remUni: 75, remPrecision: 8 }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss'
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ],
+        exclude: [path.join(__dirname, '../node_modules')]
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      name: '[name].[contenthash:8].css'
+    }),
+    new ForkTsCheckerWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+      inject: true
+    })
+  ],
+  output: {
+    path: path.join(__dirname, '../public'),
+    publicPath: '/public/',
+    filename: '[name].js'
+  }
+};
+```
+
+```javascript
+// conf/webpack.config.dev.js
+const path = require('path');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+
+const baseConfig = require('./webpack.config.base');
+
+module.exports = merge(baseConfig, {
+  mode: 'development',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    // new NamedModulesPlugin() => mode 为 development 时，默认内置了该功能
+  ],
+  devtool: 'source-map',
+  // watch: true,
+  // watchOptions: {
+  //   poll: 1000,
+  //   aggregateTimeout: 300,
+  //   ignored: /node_modules/
+  // },
+  devServer: {
+    host: '0.0.0.0',
+    port: '8888',
+    contentBase: path.join(__dirname, '../public'),
+    publicPath: '/public',
+    historyApiFallback: { index: '/public/index.html' },
+    overlay: { errors: true },
+    hot: true,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
+});
+```
+
+```javascript
+const path = require('path');
+const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const baseConfig = require('./webpack.config.base');
+
+/**
+ *  1. 体积优化：代码分割（lazy loading、split chunks）
+ *  2. 速度优化：基础包 CDN
+ *  3. Tree Shaking: production 模式默认开启
+ *  4. Scope Hoisting: production 模式默认开启
+ *  5. 代码压缩：通过插件对 js、css、html 等文件进行压缩（production 模式下默认压缩 js 文件）
+ *  6. 文件指纹: 通过 hash、chunkhash、contenthash 对 js、css、img 和 font 等文件设置指纹
+ */
+
+module.exports = merge({
+  customizeArray(base, pro, key) {
+    if (key === 'plugins') {
+      base = base.filter(p => !(
+        p instanceof MiniCssExtractPlugin || p instanceof HtmlWebpackPlugin
+      ));
+      return [...base, ...pro];
+    }
+    return undefined;
+  }
+})(baseConfig, {
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        commons: {
+          name: 'commons',
+          minSize: 0,
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+    }),
+    new OptimizeCSSAssetsWebpackPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano')
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../client/index.html'),
+      filename: 'index.html',
+      chunks: ['index', 'vendors', 'commons'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhiteSpace: true,
+        preserveLineBreaks: false,
+        removeAttributeQuotes: true,
+        removeComments: false,
+        minifyCSS: true,
+        minifyJS: true
+      }
+    }),
+    new CleanWebpackPlugin()
+  ],
+  output: {
+    filename: '[name].[chunkhash:8].js'
+  }
+});
+```
+
+```javascript
+// conf/webpack.config.js
+const devConfig = require('./webpack.config.dev');
+const prodConfig = require('./webpack.config.prod');
+
+const isDev = process.env.NODE_ENV === 'development';
+
+module.exports = [isDev ? devConfig : prodConfig];
+```
 
 ```javascript
 // .postcss.config.js
@@ -300,6 +447,7 @@ module.exports = {
   }
 };
 ```
+
 ```json
 // .babelrc
 {
@@ -309,6 +457,7 @@ module.exports = {
   ]
 }
 ```
+
 ```json
 {
   "compilerOptions": {
@@ -323,127 +472,13 @@ module.exports = {
 }
 ```
 
-```javascript
-// conf/webpack.config.base.js => 开发环境和生产环境共用的配置
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-
-module.exports = {
-  mode: 'production',
-  resolve: {
-    modules: ['node_modules'],
-    extensions: ['.ts', '.tsx'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom',
-      '@': path.join(__dirname, '../src')
-    }
-  },
-  entry: {
-    index: path.join(__dirname, 'src/index.tsx')
-  },
-  output: {
-    path: path.join(__dirname, '../public'),
-    publicPath: '/public/',
-    filename: '[name].[hash].js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.txt$/,
-        use: 'raw-loader'
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: [{ loader: 'url-loader', options: { limit: 8192 } }]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'typings-for-css-modules-loader',
-            options: {
-              modules: true,
-              namedExport: true,
-              camelCase: true,
-              minimize: true,
-              localIdentName: '[local]_[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss'
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              javascriptEnabled: true
-            }
-          }
-        ],
-        exclude: [path.join(__dirname, '../node_modules')]
-      },
-      {
-        enforce: 'pre',
-        test: /\.(ts|tsx)$/,
-        use: 'tslint-loader',
-        exclude: [path.join(__dirname, '../node_modules')]
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        use: 'babel-loader',
-        exclude: [path.join(__dirname, '../node_modules')]
-      },
-    ]
-  },
-  plugins: [
-    new ForkTsCheckerWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      minify: { removeAttributeQuotes: true },
-      template: path.join(__dirname, '../src/index.html'),
-      filename: 'index.html'
-    })
-  ]
-};
-```
-
-```javascript
-// build/webpack.config.index.js => 开发环境和生产环境不同的配置
-const path = require('path');
-const webpack = require('webpack');
-const baseConfig = require('./webpack.config.base');
-
-const isDev = process.env.NODE_ENV === 'development';
-
-if (isDev) {
-  baseConfig.mode = 'development';
-  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-  baseConfig.devtool = '#cheap-module-eval-source-map';
-  baseConfig.devServer = {
-    host: '0.0.0.0',
-    port: '8888',
-    contentBase: path.join(__dirname, '../public'),
-    publicPath: '/public',
-    historyApiFallback: { index: '/public/index.html' },
-    overlay: { errors: true },
-    hot: true
-  };
-} else {
-}
-
-module.exports = baseConfig;
-```
-
 - 在 package.json 文件中添加 npm scripts
 
 ```json
 {
-  "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.index.js",
-  "prod": "npm run clear && cross-env NODE_ENV=production webpack --config build/webpack.config.index.js",
-  "clear": "rimraf public"
+  // "dev": "cross-env NODE_ENV=development webpack --watch --config build/webpack.config.js",
+  "dev": "cross-env NODE_ENV=development webpack-dev-server --open --config build/webpack.config.js",
+  "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
 }
 ```
 

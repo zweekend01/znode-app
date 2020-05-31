@@ -1,7 +1,0 @@
-{
-  "extends": ["../tslint.json", "tslint-react"],
-  "rules": {
-    "quotemark": false,
-    "no-trailing-whitespace": false
-  }
-}
