@@ -23,16 +23,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'production',
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       // 'react-dom': '@hot-loader/react-dom',
       '@': path.join(__dirname, '../src')
     }
   },
-  // entry: {
-  //   index: ['react-hot-loader/patch', path.join(__dirname, '../src/index.tsx')]
-  // },
-  entry: ['react-hot-loader/patch', path.join(__dirname, '../src/index.tsx')],
+  entry: {
+    index: ['react-hot-loader/patch', path.join(__dirname, '../src/index.tsx')]
+  },
   module: {
     rules: [
       {
@@ -67,14 +66,16 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
+          '@teamsupercell/typings-for-css-modules-loader',
           {
-            loader: 'typings-for-css-modules-loader',
+            loader: 'css-loader',
             options: {
-              modules: true,
-              namedExport: true,
-              camelCase: true,
-              minimize: true,
-              localIdentName: '[local]_[hash:base64:5]'
+              modules: {
+                mode: 'local',
+                localIdentName: '[local]_[hash:base64:5]'
+              },
+              importLoaders: 3,
+              sourceMap: true
             }
           },
           {
@@ -134,7 +135,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '../public'),
-    publicPath: '/public/',
+    publicPath: '/public',
     filename: '[name].js'
   }
 };

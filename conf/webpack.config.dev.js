@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
   ],
   devtool: 'source-map',
   devServer: {
-    host: '0.0.0.0',
+    host: 'localhost',
     port: '8888',
     contentBase: path.join(__dirname, '../public'),
     publicPath: '/public',

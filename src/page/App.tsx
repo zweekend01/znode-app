@@ -6,9 +6,8 @@ import styles from './App.less';
 
 const App = () => (
   <div styleName="red">
-    hello world
+    hello app app app
   </div>
 );
 
 export default hot(CSSModules(App, styles));
-

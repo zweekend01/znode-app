@@ -76,6 +76,8 @@ $ npm i -D \
   eslint-config-airbnb-typescript \
   eslint-loader \
   @babel/core \
+  @babel/preset-env \
+  @babel/preset-react \
   @babel/preset-typescript \
   babel-loader \
   fork-ts-checker-webpack-plugin \
@@ -83,8 +85,8 @@ $ npm i -D \
   url-loader \
   less-loader \
   less \
+  @teamsupercell/typings-for-css-modules-loader \
   css-loader \
-  typings-for-css-modules-loader \
   px2rem-loader \
   postcss-loader \
   postcss-import \
@@ -143,7 +145,6 @@ eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队�
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommend",
     "standard",
     "airbnb-typescript"
   ]
@@ -175,7 +176,7 @@ eslint 是 ecmascript/typescript 编程格式的校验工具，有助于团队�
 
 开发环境和生产环境有部分配置重叠，配置步骤如下:
 
-- 配置 webpack.config.base.js、webpack.config.prod.js、.babelrc、tsconfig.json、postcss.config.js 文件
+- 配置 webpack.config.base.js、webpack.config.prod.js、.babelrc、tsconfig.json、postcss.config.js、.browserslistrc 文件
 
 ```javascript
 // conf/webpack.config.base.js => 开发环境和生产环境共用的配置
@@ -205,7 +206,7 @@ module.exports = {
   mode: 'production',
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       'react-dom': '@hot-loader/react-dom',
       '@': path.join(__dirname, '../src')
@@ -427,31 +428,14 @@ const isDev = process.env.NODE_ENV === 'development';
 module.exports = [isDev ? devConfig : prodConfig];
 ```
 
-```javascript
-// .postcss.config.js
-module.exports = {
-  plugins: {
-    'postcss-import': {},
-    'postcss-preset-env': {},
-    cssnano: {},
-    autoprefixer: {
-      browsers: [
-        '>1%',
-        'last 4 versions',
-        'Firefox ESR',
-        'not ie < 9' // React doesn't support IE8 anyway
-      ],
-      flexbox: 'no-2009'
-    },
-    'postcss-flexbugs-fixes': {}
-  }
-};
-```
-
 ```json
 // .babelrc
 {
-  "presets": [["@babel/preset-typescript", { "loose": true }]],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    ["@babel/preset-typescript", { "isTSX": true, "allExtension": true, "allNamespaces": true }]
+  ],
   "plugins": [
     "react-hot-loader/babel"
   ]
@@ -459,6 +443,7 @@ module.exports = {
 ```
 
 ```json
+// tslint.json
 {
   "compilerOptions": {
     "target": "es5",
@@ -470,6 +455,29 @@ module.exports = {
   },
   "include": ["./src/**/*"]
 }
+```
+
+```javascript
+// .postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-import': {},
+    'postcss-preset-env': {},
+    cssnano: {},
+    autoprefixer: {
+      flexbox: 'no-2009'
+    },
+    'postcss-flexbugs-fixes': {}
+  }
+};
+```
+
+```conf
+// .browserslistrc
+>1%
+last 4 versions
+Firefox ESR
+not ie < 9
 ```
 
 - 在 package.json 文件中添加 npm scripts
@@ -501,7 +509,6 @@ module.exports = {
   - global.d.ts
   - index.html
   - index.tsx
-  - tslint.json
 ```
 
 #### 2.1.4 业务开发

@@ -1,6 +1,5 @@
 // import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 // import { message } from 'antd';
-// // import Joi from 'joi-browser';
 //
 // // token 无效时，跳转至登录页面的路径
 // const getPathname: () => string = (): string => `/login?from=${decodeURIComponent(window.location.pathname)}`;

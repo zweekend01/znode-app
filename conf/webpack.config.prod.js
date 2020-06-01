@@ -57,7 +57,7 @@ module.exports = merge({
       cssProcessor: require('cssnano')
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../client/index.html'),
+      template: path.join(__dirname, '../src/index.html'),
       filename: 'index.html',
       chunks: ['index', 'vendors', 'commons'],
       inject: true,
